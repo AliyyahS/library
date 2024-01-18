@@ -11,9 +11,9 @@ function addBookToLibrary(book) {
     library.push(book)
 }
 
-function displayBook(book) {
-  const main = document.querySelector('.main')
-  
+function updateDisplay() {
+  resetDisplay()
+
   library.forEach(function(book) {
     const card = document.createElement('div')
     card.classList.add('card')
@@ -53,11 +53,25 @@ function displayBook(book) {
   })
 }
 
+function getBookInfo() {
+  const title = form.querySelector('#title').value
+  const author = form.querySelector('#author').value
+  const pages = form.querySelector('#pages').value
+  const read = form.querySelector('#read').checked
+  return new Book(title, author, pages, read)
+}
+
+function resetDisplay() {
+  const card = main.querySelectorAll('div')
+  card.forEach(div => div.remove())
+}
+
 // DOM elements
 
+const main = document.querySelector('.main')
 const addBookBtn = document.querySelector('#addBook')
-
 const dialog = document.querySelector('dialog')
+const form = dialog.querySelector('#form')
 const submitBtn = dialog.querySelector('#submit')
 const cancelBtn = dialog.querySelector('#cancel')
 
@@ -69,6 +83,9 @@ addBookBtn.addEventListener("click", () => {
 
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault()
+  addBookToLibrary(getBookInfo())
+  updateDisplay()
+  form.reset()
   dialog.close()
 });
 
