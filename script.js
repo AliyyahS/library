@@ -40,12 +40,14 @@ function updateDisplay() {
     controls.classList.add('controls')
     card.appendChild(controls)
 
-    const status = document.createElement('div')
-    status.classList.add('status')
-    controls.appendChild(status)
+    const statusBtn = document.createElement('button')
+    statusBtn.classList.add('status')
+    statusBtn.setAttribute('data-index', index)
+    controls.appendChild(statusBtn)
     if (book.read) {
-      status.textContent = 'Read'
-    } else status.textContent = 'Unread'
+      statusBtn.classList.toggle('read')
+      statusBtn.textContent = 'Read'
+    } else statusBtn.textContent = 'Unread'
 
     const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
@@ -54,6 +56,7 @@ function updateDisplay() {
     deleteBtn.textContent = 'Delete'
   })
   
+  setStatusBtns()
   setDeleteBtns()
 }
 
@@ -70,14 +73,33 @@ function resetDisplay() {
   card.forEach(div => div.remove())
 }
 
+function setStatusBtns() {
+  const statusBtns = main.querySelectorAll('.status')
+
+  statusBtns.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      button.classList.toggle('read')
+      if(button.classList.contains('read')) {
+        button.textContent = 'Read'
+      } else button.textContent = 'Unread'
+      updateStatus(event.target)
+    })
+  })
+}
+
+function updateStatus(book) {
+  const dataIndex = book.getAttribute('data-index')
+  library[dataIndex].read = !library[dataIndex].read
+}
+
 function setDeleteBtns() {
   const deleteBtns = main.querySelectorAll('.delete')
   
   deleteBtns.forEach((button) => {
     button.addEventListener("click", (event) => {
-      deleteBook(event.target);
-     });
-  });
+      deleteBook(event.target)
+     })
+  })
 }
 
 function deleteBook(book) {
