@@ -11,12 +11,22 @@
 <body>
     <div class="header">
         <div>Library</div>
-        <button>Add new book</button>
+        <button id="addBook">Add new book</button>
     </div>
     <div class="main">
     </div>
     <div class="footer">
         <div>A project by <a href="https://github.com/AliyyahS">AliyyahS</a></div>
     </div>
+    <dialog id="dialog">
+        <h1>Add a new book</h1>
+        <form id="form">
+            <input type="text" id="title" name="title" placeholder="Title">
+            <input type="text" id="author" name="author" placeholder="Author's name">
+            <input type="number" id="pages" name="pages" placeholder="No. of pages">
+            <button type="submit" id="submit">Submit</button>
+            <button type="reset" id="cancel">Cancel</button>
+        </form>
+    </dialog>
 </body>
 </html>

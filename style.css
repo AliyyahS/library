@@ -32,6 +32,7 @@ body {
     font-size: 14px;
     font-weight: 700;
     color: white;
+    cursor: pointer;
 }
 
 .main {
@@ -105,3 +106,26 @@ h3 {
     color: inherit;
 }
 
+#dialog {
+    padding: 24px;
+}
+  
+#form {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+  
+#form > * {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 12px;
+}
+  
+#form > button {
+    background-color: #002244;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
