@@ -45,7 +45,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, 240px);
     grid-auto-rows: min(240px, 60vh);
-    gap: 24px 16px;
+    gap: 40px;
 }
 
 .card {
@@ -91,6 +91,20 @@ h3 {
     justify-content: space-between;
 }
 
+.controls > button {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px;
+    min-width: 56px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.controls > .read {
+    border: none;
+    background-color: #A8E4A0;
+}
 
 .footer {
     height: 56px;
