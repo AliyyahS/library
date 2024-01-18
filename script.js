@@ -14,9 +14,10 @@ function addBookToLibrary(book) {
 function updateDisplay() {
   resetDisplay()
 
-  library.forEach(function(book) {
+  library.forEach((book, index) => {
     const card = document.createElement('div')
     card.classList.add('card')
+    card.setAttribute('data-index', index)
     main.appendChild(card)
 
     const info = document.createElement('div')
@@ -46,11 +47,14 @@ function updateDisplay() {
       status.textContent = 'Read'
     } else status.textContent = 'Unread'
 
-    const deleteBtn = document.createElement('div')
+    const deleteBtn = document.createElement('button')
     deleteBtn.classList.add('delete')
+    deleteBtn.setAttribute('data-index', index)
     controls.appendChild(deleteBtn)
     deleteBtn.textContent = 'Delete'
   })
+  
+  setDeleteBtns()
 }
 
 function getBookInfo() {
@@ -64,6 +68,22 @@ function getBookInfo() {
 function resetDisplay() {
   const card = main.querySelectorAll('div')
   card.forEach(div => div.remove())
+}
+
+function setDeleteBtns() {
+  const deleteBtns = main.querySelectorAll('.delete')
+  
+  deleteBtns.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      deleteBook(event.target);
+     });
+  });
+}
+
+function deleteBook(book) {
+  const dataIndex = book.getAttribute('data-index')
+  library.splice(dataIndex, 1)
+  updateDisplay()
 }
 
 // DOM elements
