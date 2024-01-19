@@ -150,3 +150,18 @@ h3 {
     border: none;
     cursor: pointer;
 }
+
+.invalid {
+    border:2px solid red;
+}
+
+#dialog > .message {
+    font-family: inherit;
+    font-size: 12px;
+    min-height: 28px;
+    margin-top: 12px;
+}
+
+#dialog > .errorMessage {
+    height: 14px;
+}

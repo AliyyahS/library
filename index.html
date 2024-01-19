@@ -21,9 +21,9 @@
     <dialog id="dialog">
         <h1>Add a new book</h1>
         <form id="form">
-            <input type="text" id="title" name="title" placeholder="Title">
-            <input type="text" id="author" name="author" placeholder="Author's name">
-            <input type="number" id="pages" name="pages" placeholder="No. of pages">
+            <input type="text" id="title" name="title" placeholder="Title*" required>
+            <input type="text" id="author" name="author" placeholder="Author's name*" required>
+            <input type="number" id="pages" name="pages" placeholder="No. of pages*" required>
             <div>
                 <input type="checkbox" id="read" name="read">
                 <label for="read">I have read the book</label>
@@ -31,6 +31,10 @@
             <button type="submit" id="submit">Submit</button>
             <button type="reset" id="cancel">Cancel</button>
         </form>
+        <div class="message">
+            <div>*Required</div>
+            <div class="errorMessage"></div>
+        </div>
     </dialog>
 </body>
 </html>

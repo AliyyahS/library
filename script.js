@@ -117,6 +117,35 @@ const form = dialog.querySelector('#form')
 const submitBtn = dialog.querySelector('#submit')
 const cancelBtn = dialog.querySelector('#cancel')
 
+
+// Form validation
+
+// Form input DOM elements
+
+const requiredInputs = form.querySelectorAll('input')
+const message = dialog.querySelector('.message')
+const errorMessage = message.querySelector('.errorMessage')
+
+// Functions
+
+function showErrorMessage() {
+  errorMessage.textContent = `Please fill in the required fields.`
+}
+
+function addInvalidClass() {
+  requiredInputs.forEach((input) => {
+    if(!input.checkValidity()) {
+      input.classList.add('invalid')
+    }
+  })
+}
+
+function removeInvalidClass() {
+  requiredInputs.forEach((input) => {
+    input.classList.remove('invalid')
+  })
+}
+
 // Event listeners
 
 addBookBtn.addEventListener("click", () => {
@@ -125,12 +154,28 @@ addBookBtn.addEventListener("click", () => {
 
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault()
-  addBookToLibrary(getBookInfo())
-  updateDisplay()
-  form.reset()
-  dialog.close()
+  if (!form.checkValidity()) {
+    showErrorMessage()
+    addInvalidClass()
+  } else {
+    addBookToLibrary(getBookInfo())
+    updateDisplay()
+    form.reset()
+    dialog.close()
+  }
 });
 
 cancelBtn.addEventListener("click", () => {
+  errorMessage.textContent = ''
+  removeInvalidClass()
   dialog.close()
 });
+
+requiredInputs.forEach((input) => {
+  input.addEventListener("input", () => {
+    if(input.checkValidity()) {
+      input.classList.remove('invalid')
+      errorMessage.textContent = ''
+    } else input.classList.add('invalid')
+  })
+})
